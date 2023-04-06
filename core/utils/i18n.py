@@ -58,10 +58,18 @@ class LocaleFile(TypedDict):
 
 class Locale:
     def __init__(self, locale: str, fallback_lng=None):
+        """Language code deprecation"""
+        deprecated_lngs = {
+            'en_us': 'en',
+            'zh_cn': 'zh-hans',
+            'zh_tw': 'zh-hant',
+        }
+        locale = deprecated_lngs[locale] or locale
+
         """创建一个本地化对象"""
 
         if fallback_lng is None:
-            fallback_lng = ['zh_cn', 'zh_tw', 'en_us']
+            fallback_lng = ['zh-hans', 'zh-hant', 'en']
         self.locale = locale
         self.data: LocaleFile = locale_cache[locale]
         self.fallback_lng = fallback_lng

@@ -1,3 +1,11 @@
+api_token_env: CROWDIN_PERSONAL_TOKEN
+project_id_env: CROWDIN_PROJECT_ID
 files:
-  - source: /**/locales/*zh_cn.json
-    translation: /**/locales/%locale_with_underscore%.json
+  - source: /**/locales/zh-hans.json
+    translation: /%original_path%/%two_letters_code%.json
+    languages_mapping:
+      two_letters_code:
+        pt-BR: pt-br
+        zh-CN: zh-hans
+        zh-TW: zh-hant
+        zh-HK: zh-hant-hk

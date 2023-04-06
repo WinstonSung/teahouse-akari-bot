@@ -1,0 +1,54 @@
+name: Crowdin sync translations master branch
+on:
+  push: 
+    branches: [ master ]
+  schedule:
+    # every day at 00:00 and 12:00 UTC
+    - cron: '00 */12 * * *'
+  workflow_dispatch:
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3.4.0
+    - name: Download and push translations before source strings updated
+      uses: crowdin/github-action@v1.7.1
+      with:
+        crowdin_branch_name: master
+        upload_sources: false
+        download_translations: true
+        skip_untranslated_strings: true
+        localization_branch_name: master
+        push_translations: true
+        commit_message: 'Localization updates from https://crowdin.com'
+        create_pull_request: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
+        CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+        CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+    - name: Upload new source strings to Crowdin
+      uses: crowdin/github-action@v1.7.1
+      with:
+        crowdin_branch_name: master
+        upload_sources: true
+        upload_translations: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
+        CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+        CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+    - name: Download and push translations after source strings updated
+      uses: crowdin/github-action@v1.7.1
+      with:
+        crowdin_branch_name: master
+        upload_sources: false
+        download_translations: true
+        skip_untranslated_strings: true
+        localization_branch_name: master
+        push_translations: true
+        commit_message: 'Localization updates from https://crowdin.com'
+        create_pull_request: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.CROWDIN_GITHUB_TOKEN }}
+        CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+        CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
