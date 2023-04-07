@@ -14,15 +14,15 @@
     "coin.drop_place.undertable": "桌下",
     "coin.drop_place.window": "窗外",
     "coin.head": "…是正面！",
-    "coin.head.all": "它们…\n…全是正面！",
+    "coin.head.all": "它們…\n…全是正面！",
     "coin.tail": "…是反面！",
-    "coin.tail.all": "它们…\n…全是反面！",
+    "coin.tail.all": "它們…\n…全是反面！",
     "coin.mix": "其中...\n有",
     "coin.mix.head": " ${head} 枚是正面，",
     "coin.mix.tail": "${tail} 枚是反面",
     "coin.mix.stand": "…還有 ${stand} 枚立起來了！",
     "coin.mix.end": "。",
     "coin_regex.help": "啟用後將在發送的聊天內容尋找到以下相符的訊息時執行對應指令：\n",
-    "coin.stand": "…它立起来了！",
+    "coin.stand": "…它立起來了！",
     "coin.stand.all": "它們…\n…全都立起来了？！"
 }
